@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ไม่พบหน้า - คอร์สธุรกิจหรูหรา</title>
+    <!-- Tailwind CSS with Plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Google Fonts: Kanit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100&display=swap" rel="stylesheet">
+    <!-- Tailwind Config for Custom Colors and Fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            100: '#FBF5B7',
+                            200: '#FCF6BA',
+                            300: '#E3C372',
+                            400: '#D4AF37',
+                            500: '#BF953F',
+                            600: '#B38728',
+                            700: '#AA771C',
+                            800: '#8A5F14',
+                            900: '#4D3409',
+                        },
+                        richBlack: '#0a0a0a',
+                        darkGrey: '#1a1a1a'
+                    },
+                    fontFamily: {
+                        sans: ['Kanit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Link to custom CSS file -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>">
+</head>
+<body class="bg-richBlack text-gray-200 font-sans antialiased min-h-screen flex items-center">
+    <div class="container mx-auto px-6 py-20">
+        <div class="max-w-2xl mx-auto text-center">
+            <div class="text-9xl font-bold text-gold-500 mb-4">404</div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">ไม่พบหน้าที่คุณต้องการ</h1>
+            <p class="text-xl text-gray-400 mb-10">ขออภัย ไม่สามารถพบหน้าที่คุณกำลังมองหาได้</p>
+            
+            <div class="flex flex-col items-center gap-4">
+                <a href="index.html" class="px-8 py-4 bg-gradient-gold text-white font-bold rounded shadow-gold-glow hover:shadow-gold-glow-hover transition-all transform hover:-translate-y-1">
+                    กลับไปหน้าหลัก
+                </a>
+                <a href="https://m.me/thetop0ne" class="px-8 py-4 border border-gold-500 text-gold-300 hover:bg-gold-500/10 font-bold rounded transition-colors">
+                    ติดต่อฝ่ายสนับสนุน
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Load custom JavaScript -->
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

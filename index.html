@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html lang="th"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Top 1% - คิดแบบเศรษฐี</title>
+<!-- Tailwind CSS with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Kanit -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config for Custom Colors and Fonts -->
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            100: '#FBF5B7',
+                            200: '#FCF6BA',
+                            300: '#E3C372',
+                            400: '#D4AF37',
+                            500: '#BF953F',
+                            600: '#B38728',
+                            700: '#AA771C',
+                            800: '#8A5F14',
+                            900: '#4D3409',
+                        },
+                        richBlack: '#0a0a0a',
+                        darkGrey: '#1a1a1a'
+                    },
+                    fontFamily: {
+                        sans: ['Kanit', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'gold-glow': '0 4px 20px rgba(191, 149, 63, 0.4)',
+                        'gold-glow-hover': '0 8px 30px rgba(191, 149, 63, 0.6)',
+                    }
+                }
+            }
+        }
+    </script>
+<!-- Custom CSS for Gold Text and Gradients -->
+<style data-purpose="gold-effects">
+        .text-gradient-gold {
+            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .bg-gradient-gold {
+            background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
+            transition: all 0.3s ease;
+        }
+
+        .bg-gradient-gold:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+        }
+
+        .border-gradient-gold {
+            border: 2px solid transparent;
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            background-image: linear-gradient(#1a1a1a, #1a1a1a), linear-gradient(to right, #BF953F, #FCF6BA, #B38728);
+        }
+    </style>
+<!-- Custom CSS for decorative elements -->
+<style data-purpose="decorations">
+        .gold-divider {
+            height: 2px;
+            width: 100px;
+            background: linear-gradient(to right, transparent, #BF953F, transparent);
+            margin: 2rem auto;
+        }
+
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            width: 2px;
+            background: #BF953F;
+        }
+
+        @media (min-width: 768px) {
+            .timeline-line::before {
+                left: 50%;
+                margin-left: -1px;
+            }
+        }
+    </style>
+    
+    <!-- Link to custom CSS file -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>">
+</head>
+<body class="bg-richBlack text-gray-200 font-sans antialiased overflow-x-hidden">
+    <!-- Load custom JavaScript -->
+    <script src="assets/js/script.js"></script>
+
+    <!-- Countdown Timer Script -->
+    <script>
+        // Function to initialize or resume the countdown
+        function initCountdown() {
+            let endTime = localStorage.getItem('countdownEndTime');
+
+            // If no stored end time or it's expired, set a new one (24 hours from now)
+            if (!endTime || new Date().getTime() > parseInt(endTime)) {
+                endTime = new Date().getTime() + (24 * 60 * 60 * 1000); // 24 hours from now
+                localStorage.setItem('countdownEndTime', endTime);
+            } else {
+                endTime = parseInt(endTime);
+            }
+
+            // Update the count down every 1 second
+            var x = setInterval(function() {
+                // Get today's date and time
+                var now = new Date().getTime();
+
+                // Find the distance between now and the count down date
+                var distance = endTime - now;
+
+                // Time calculations for hours, minutes and seconds (no days)
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Output the result in elements with id
+                document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+                document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+                document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+
+                // If the count down is over, clear interval and reset
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("hours").innerHTML = "00";
+                    document.getElementById("minutes").innerHTML = "00";
+                    document.getElementById("seconds").innerHTML = "00";
+
+                    // Clear the stored end time
+                    localStorage.removeItem('countdownEndTime');
+
+                    // Restart the countdown with a new 24-hour period
+                    setTimeout(initCountdown, 1000);
+                }
+            }, 1000);
+        }
+
+        // Initialize the countdown when the page loads
+        initCountdown();
+    </script>
+<!-- BEGIN: Header/Nav -->
+<nav class="fixed w-full z-50 bg-richBlack/90 backdrop-blur-md border-b border-gold-600/30">
+<div class="container mx-auto px-6 py-4 flex justify-between items-center">
+<div>
+                <img src="assets/images/Logo.png" alt="โลโก้เว็บไซต์" class="h-8 md:h-10 object-contain">
+            </div>
+<div class="flex items-center gap-4">
+<a class="hidden md:inline-block px-6 py-2 bg-[#BF953F] text-black hover:bg-[#AA771C] transition-colors duration-300 rounded-sm font-bold" href="#pricing">
+                    จองสิทธิ์ทันที
+                </a>
+</div>
+</div>
+</nav>
+<!-- END: Header/Nav -->
+<!-- BEGIN: Hero Section -->
+<header class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden" data-purpose="hero-section">
+<!-- Background Elements -->
+<div class="absolute inset-0 bg-richBlack z-0">
+<div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold-400 via-richBlack to-richBlack"></div>
+</div>
+<div class="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+<!-- Text Content -->
+<div class="text-center md:text-left space-y-6">
+<span class="inline-block py-1 px-3 border border-gold-500/50 rounded-full text-gold-300 text-sm tracking-widest uppercase mb-2">
+                    อีบุ๊คระดับพรีเมียม
+                </span>
+<h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-5xl md:text-7xl">
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-[#BF953F] to-[#FBF5B7]">ปลดล็อกศักยภาพของคุณ:</span> <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-[#BF953F] to-[#FBF5B7]">เปลี่ยนชีวิตของคุณ<br/>ใน 30 วัน</span>
+</h1>
+<p class="text-gray-400 text-lg md:text-xl font-light leading-relaxed max-w-lg mx-auto md:mx-0">
+                    ไม่ต้องใช้ทุน ไม่ต้องมีประสบการณ์ เปลี่ยนชีวิตด้วยระบบที่พิสูจน์แล้วว่าได้ผลจริงและยั่งยืน
+                </p>
+<div class="pt-6">
+<a class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-richBlack bg-gradient-gold rounded shadow-gold-glow hover:shadow-gold-glow-hover transition-all transform hover:-translate-y-1 w-full md:w-auto" href="#pricing">
+                        สั่งซื้อตอนนี้ - เปลี่ยนชีวิตทันที
+                    </a>
+<p class="mt-3 text-xs text-gray-500">*รับประกันความพึงพอใจ 100%</p>
+</div>
+</div>
+<!-- Image Content -->
+<div class="relative flex justify-center items-center">
+<!-- Decorative Glow behind book -->
+<div class="absolute w-64 h-64 bg-gold-500/20 rounded-full blur-3xl filter animate-pulse"></div>
+<!-- 3D Book Placeholder -->
+<div class="relative w-full max-w-md aspect-[3/4] bg-transparent transform transition-transform duration-500 hover:scale-105">
+<img alt="หนังสือคอร์สระดับพรีเมียม" class="w-full h-full object-contain drop-shadow-2xl rounded-lg border border-gold-900/50 shadow-gold-glow" src="assets/images/TopOne.jpg" style="filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.5));"/>
+</div>
+</div>
+</div>
+</header>
+<!-- END: Hero Section -->
+<!-- BEGIN: Pain Points Section -->
+<section class="py-20 bg-darkGrey relative overflow-hidden" data-purpose="pain-points">
+<!-- Abstract Gold Lines Decoration -->
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+<path d="M0,50 Q400,100 800,50 T1600,50" fill="none" stroke="#BF953F" stroke-width="2"></path>
+<path d="M0,150 Q400,200 800,150 T1600,150" fill="none" stroke="#BF953F" stroke-width="2"></path>
+</svg>
+</div>
+<div class="container mx-auto px-6 relative z-10">
+<div class="text-center mb-16">
+<p class="text-center uppercase tracking-[2px] text-gray-500 text-sm mb-2">ส่วนของปัญหา</p><h2 class="text-3xl md:text-5xl font-bold text-white mb-4">คุณกำลังติดอยู่ใน <span class="text-red-500">วังวน</span> นี้ใช่ไหม?</h2>
+<div class="gold-divider"></div>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Pain Point 1 -->
+<div class="bg-richBlack p-8 rounded-xl border border-gray-800 hover:border-gold-600/50 transition-colors duration-300 shadow-lg">
+<div class="w-12 h-12 bg-red-900/20 rounded-full flex items-center justify-center mb-6"><svg class="w-6 h-6 text-gold-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div>
+<h3 class="text-xl font-semibold text-white mb-3">งานประจำ 9-5 ไม่มีเวลา</h3>
+<p class="text-gray-400">รู้สึกหมดไฟ เหนื่อยกับการเดินทาง และไม่มีเวลาใช้ชีวิตในแบบที่ต้องการ</p>
+</div>
+<!-- Pain Point 2 -->
+<div class="bg-richBlack p-8 rounded-xl border border-gray-800 hover:border-gold-600/50 transition-colors duration-300 shadow-lg">
+<div class="w-12 h-12 bg-red-900/20 rounded-full flex items-center justify-center mb-6"><svg class="w-6 h-6 text-gold-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div>
+<h3 class="text-xl font-semibold text-white mb-3">ไม่มีเงินลงทุน เริ่มต้นไม่ได้</h3>
+<p class="text-gray-400">กังวลเรื่องความเสี่ยง กลัวเงินจม ไม่กล้าเริ่มต้นธุรกิจของตัวเอง</p>
+</div>
+<!-- Pain Point 3 -->
+<div class="bg-richBlack p-8 rounded-xl border border-gray-800 hover:border-gold-600/50 transition-colors duration-300 shadow-lg">
+<div class="w-12 h-12 bg-red-900/20 rounded-full flex items-center justify-center mb-6"><svg class="w-6 h-6 text-gold-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div>
+<h3 class="text-xl font-semibold text-white mb-3">ไม่รู้วิธีการ ไม่มั่นใจ</h3>
+<p class="text-gray-400">ข้อมูลในอินเทอร์เน็ตเยอะเกินไป จับต้นชนปลายไม่ถูก ไม่รู้จะเริ่มตรงไหน</p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Pain Points Section -->
+<!-- BEGIN: Roadmap Section -->
+<section class="py-24 bg-white text-richBlack" data-purpose="roadmap">
+<div class="container mx-auto px-6">
+<div class="text-center mb-16">
+<span class="text-gold-600 font-bold tracking-widest uppercase text-sm">แผนผังสู่ความสำเร็จ</span>
+<h2 class="text-4xl md:text-5xl font-bold mt-2">แผนการเปลี่ยนแปลงใน 4 สัปดาห์</h2>
+<div class="w-24 h-1 bg-gold-500 mx-auto mt-6"></div>
+</div>
+<div class="relative timeline-line max-w-4xl mx-auto"><!-- Central Vertical Gold Line -->
+<div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-[#BF953F]"></div>
+<!-- Week 1: Text Left, Spacer Right -->
+<div class="relative z-10 flex items-center justify-between w-full mb-12">
+<div class="w-5/12 text-right pr-8">
+<h3 class="text-2xl font-bold text-[#BF953F]">สัปดาห์ที่ 1</h3>
+<p class="text-lg font-bold text-richBlack">ค้นพบตัวเอง &amp; ตลาด</p>
+<p class="text-xs text-gray-500 mb-2">(Discover Yourself & Market)</p>
+<p class="text-gray-600 text-sm">วิเคราะห์จุดแข็งของคุณ และหาตลาดที่ "จ่ายหนัก" โดยไม่ต้องลองผิดลองถูก</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-[#BF953F] text-white flex items-center justify-center font-bold shadow-lg ring-4 ring-white z-20 flex-shrink-0">1</div>
+<div class="w-5/12 pl-8"></div>
+</div>
+<!-- Week 2: Spacer Left, Text Right -->
+<div class="relative z-10 flex items-center justify-between w-full mb-12">
+<div class="w-5/12 text-right pr-8"></div>
+<div class="w-10 h-10 rounded-full bg-[#BF953F] text-white flex items-center justify-center font-bold shadow-lg ring-4 ring-white z-20 flex-shrink-0">2</div>
+<div class="w-5/12 pl-8 text-left">
+<h3 class="text-2xl font-bold text-[#BF953F]">สัปดาห์ที่ 2</h3>
+<p class="text-lg font-bold text-richBlack">สร้างตัวตน &amp; เนื้อหา</p>
+<p class="text-xs text-gray-500 mb-2">(Build Identity & Content)</p>
+<p class="text-gray-600 text-sm">เทคนิคการสร้าง Personal Branding ให้ดูแพง และผลิตคอนเทนต์ที่ดึงดูดลูกค้าทันที</p>
+</div>
+</div>
+<!-- Week 3: Text Left, Spacer Right -->
+<div class="relative z-10 flex items-center justify-between w-full mb-12">
+<div class="w-5/12 text-right pr-8">
+<h3 class="text-2xl font-bold text-[#BF953F]">สัปดาห์ที่ 3</h3>
+<p class="text-lg font-bold text-richBlack">ระบบอัตโนมัติ</p>
+<p class="text-xs text-gray-500 mb-2">(Automation System)</p>
+<p class="text-gray-600 text-sm">ตั้งค่าเครื่องมือช่วยขาย ให้ทำงานแทนคุณ 24 ชั่วโมง แม้ในยามหลับ</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-[#BF953F] text-white flex items-center justify-center font-bold shadow-lg ring-4 ring-white z-20 flex-shrink-0">3</div>
+<div class="w-5/12 pl-8"></div>
+</div>
+<!-- Week 4: Spacer Left, Text Right -->
+<div class="relative z-10 flex items-center justify-between w-full">
+<div class="w-5/12 text-right pr-8"></div>
+<div class="w-10 h-10 rounded-full bg-[#BF953F] text-white flex items-center justify-center font-bold shadow-lg ring-4 ring-white z-20 flex-shrink-0">4</div>
+<div class="w-5/12 pl-8 text-left">
+<h3 class="text-2xl font-bold text-[#BF953F]">สัปดาห์ที่ 4</h3>
+<p class="text-lg font-bold text-richBlack">สร้างรายได้ &amp; ขยายผล</p>
+<p class="text-xs text-gray-500 mb-2">(Generate Income & Scale)</p>
+<p class="text-gray-600 text-sm">เปิดตัวสินค้า ปิดการขาย และวางแผนขยายธุรกิจสู่หลักแสน</p>
+</div>
+</div></div>
+</div>
+</section>
+<!-- END: Roadmap Section -->
+<!-- BEGIN: Benefits Grid -->
+<section class="py-20 bg-gray-50" data-purpose="benefits">
+<div class="container mx-auto px-6">
+<h2 class="text-3xl md:text-4xl font-bold text-center text-richBlack mb-16">สิ่งที่คุณจะได้รับ</h2>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"><!-- Card 1 -->
+<div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#BF953F]">
+<div class="w-14 h-14 bg-gold-100 rounded-lg flex items-center justify-center mb-6 text-[#BF953F]">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">วิธีเริ่มต้นแบบไม่มีทุน</h3>
+<p class="text-gray-600">เทคนิคการเริ่มธุรกิจโดยไม่ต้องใช้เงินทุนแม้แต่บาทเดียว</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#BF953F]">
+<div class="w-14 h-14 bg-gold-100 rounded-lg flex items-center justify-center mb-6 text-[#BF953F]">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">แผนการดำเนินงาน 30 วัน</h3>
+<p class="text-gray-600">แผนการลงมือทำรายวัน ที่ชัดเจน ไม่ต้องเดาทางเอง</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#BF953F]">
+<div class="w-14 h-14 bg-gold-100 rounded-lg flex items-center justify-center mb-6 text-[#BF953F]">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">เครื่องมือพิเศษ</h3>
+<p class="text-gray-600">รวมเครื่องมือลับที่มืออาชีพใช้ในการทุ่นแรงและเวลา</p>
+</div>
+<!-- Card 4 -->
+<div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#BF953F]">
+<div class="w-14 h-14 bg-gold-100 rounded-lg flex items-center justify-center mb-6 text-[#BF953F]">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">การเข้าถึงตลอดชีพ</h3>
+<p class="text-gray-600">เข้าถึงเนื้อหาได้ตลอดชีพ และรับการอัพเดทฟรีตลอดไป</p>
+</div>
+<!-- Card 5 -->
+<div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#BF953F]">
+<div class="w-14 h-14 bg-gold-100 rounded-lg flex items-center justify-center mb-6 text-[#BF953F]">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">ชุมชนส่วนตัว</h3>
+<p class="text-gray-600">กลุ่มลับสำหรับแลกเปลี่ยนความรู้และ connection ระดับพรีเมียม</p>
+</div>
+<!-- Card 6 -->
+<div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#BF953F]">
+<div class="w-14 h-14 bg-gold-100 rounded-lg flex items-center justify-center mb-6 text-[#BF953F]">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="text-xl font-bold text-gray-800 mb-2">โบนัสทางลัด</h3>
+<p class="text-gray-600">โบนัสพิเศษ ทางลัดสู่ความสำเร็จที่ประหยัดเวลาได้เป็นปี</p>
+</div></div>
+</div>
+</section>
+<!-- END: Benefits Grid -->
+<!-- BEGIN: Pricing Section -->
+<section class="py-24 bg-richBlack relative" data-purpose="pricing" id="pricing">
+<div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+<div class="container mx-auto px-6 relative z-10">
+<div class="max-w-md mx-auto">
+<div class="bg-richBlack border border-[#BF953F] rounded-2xl overflow-hidden relative shadow-2xl"><div class="bg-gradient-to-r from-[#BF953F] via-[#FBF5B7] to-[#BF953F] py-4 text-center w-full">
+<h3 class="text-black font-bold text-xl md:text-2xl uppercase tracking-wider">ข้อเสนอพิเศษวันนี้</h3>
+</div>
+<div class="p-8 md:p-12 text-center">
+<div class="mb-4">
+<span class="text-gray-500 text-lg line-through decoration-red-500 decoration-2">มูลค่ารวม: 5,900 บาท</span>
+</div>
+<div class="text-7xl font-bold text-white mb-8">
+        498 บาท
+    </div>
+
+    <!-- Countdown Timer -->
+    <div class="mb-6">
+        <p class="text-gold-500 text-lg font-bold mb-3 text-center">ข้อเสนอนี้จะหมดภายใน</p>
+        <div class="flex justify-center space-x-2 md:space-x-4">
+            <div class="countdown-box">
+                <div class="bg-richBlack border border-gold-600 rounded-lg py-2 px-3 md:px-4 text-center">
+                    <span id="hours" class="text-2xl md:text-3xl font-bold text-white">00</span>
+                    <div class="text-xs md:text-sm text-gold-400 mt-1">ชั่วโมง</div>
+                </div>
+            </div>
+            <div class="countdown-box">
+                <div class="bg-richBlack border border-gold-600 rounded-lg py-2 px-3 md:px-4 text-center">
+                    <span id="minutes" class="text-2xl md:text-3xl font-bold text-white">00</span>
+                    <div class="text-xs md:text-sm text-gold-400 mt-1">นาที</div>
+                </div>
+            </div>
+            <div class="countdown-box">
+                <div class="bg-richBlack border border-gold-600 rounded-lg py-2 px-3 md:px-4 text-center">
+                    <span id="seconds" class="text-2xl md:text-3xl font-bold text-white">00</span>
+                    <div class="text-xs md:text-sm text-gold-400 mt-1">วินาที</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<ul class="text-left text-gray-300 space-y-4 mb-8 max-w-xs mx-auto">
+<li class="flex items-center"><svg class="w-5 h-5 text-gold-500 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>อีบุ๊คฉบับสมบูรณ์ (PDF)</li>
+<li class="flex items-center"><svg class="w-5 h-5 text-gold-500 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>เช็คลิสต์ 30 วัน</li>
+<li class="flex items-center"><svg class="w-5 h-5 text-gold-500 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>เข้ากลุ่มลับตลอดชีพ</li>
+<li class="flex items-center"><svg class="w-5 h-5 text-gold-500 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>รับประกันคืนเงิน 7 วัน</li>
+</ul>
+<a href="https://buy.stripe.com/bJe7sM7HVffIaYa9en6AM00" class="w-full py-4 text-xl font-bold text-richBlack bg-gradient-gold rounded shadow-gold-glow hover:shadow-gold-glow-hover transition-all transform hover:-translate-y-1 block text-center leading-8">
+        จองสิทธิ์ราคาพิเศษ
+    </a>
+<p class="mt-4 text-xs text-gray-500">ราคานี้จำกัดจำนวน 100 ท่านแรกเท่านั้น</p>
+</div></div>
+</div>
+</div>
+</section>
+<!-- END: Pricing Section -->
+<!-- BEGIN: FAQ Section -->
+<section class="py-20 bg-white" data-purpose="faq">
+<div class="container mx-auto px-6 max-w-3xl">
+<h2 class="text-3xl md:text-4xl font-bold text-center text-richBlack mb-12">คำถามที่พบบ่อย (FAQ)</h2>
+<div class="space-y-4">
+<!-- Question 1 -->
+<details class="group bg-gray-50 rounded-lg">
+<summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6 text-lg text-richBlack group-hover:bg-gray-100 transition-colors rounded-lg">
+<span>มือใหม่ทำได้ไหม? ไม่เคยทำออนไลน์มาก่อน</span>
+<span class="transition group-open:rotate-180">
+<svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+</span>
+</summary>
+<div class="text-gray-600 mt-0 px-6 pb-6 pt-0 leading-relaxed">
+                        แน่นอนครับ! คอร์สนี้ออกแบบมาเพื่อคนที่เริ่มต้นจากศูนย์โดยเฉพาะ เราปูพื้นฐานตั้งแต่ Mindset ไปจนถึงการลงมือทำทีละขั้นตอน ภาษาที่ใช้เข้าใจง่าย ไม่ต้องเก่งไอทีก็ทำได้
+                    </div>
+</details>
+<!-- Question 2 -->
+<details class="group bg-gray-50 rounded-lg">
+<summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6 text-lg text-richBlack group-hover:bg-gray-100 transition-colors rounded-lg">
+<span>ต้องมีคอมพิวเตอร์ไหม? หรือใช้มือถือเครื่องเดียวได้?</span>
+<span class="transition group-open:rotate-180">
+<svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+</span>
+</summary>
+<div class="text-gray-600 mt-0 px-6 pb-6 pt-0 leading-relaxed">
+                        สามารถเริ่มต้นด้วยมือถือเพียงเครื่องเดียวได้ครับ ในคอร์สจะแนะนำแอปพลิเคชั่นที่ใช้แทนโปรแกรมในคอมพิวเตอร์ได้เกือบทั้งหมด เมื่อเริ่มมีรายได้แล้วค่อยขยับขยายซื้อคอมพิวเตอร์ภายหลังได้ครับ
+                    </div>
+</details>
+<!-- Question 3 -->
+<details class="group bg-gray-50 rounded-lg">
+<summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6 text-lg text-richBlack group-hover:bg-gray-100 transition-colors rounded-lg">
+<span>หลังจากชำระเงินแล้ว จะได้รับของอย่างไร?</span>
+<span class="transition group-open:rotate-180">
+<svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+</span>
+</summary>
+<div class="text-gray-600 mt-0 px-6 pb-6 pt-0 leading-relaxed">
+                        ระบบจะส่งอีบุ๊คและลิงก์เข้ากลุ่มลับไปยังอีเมลที่คุณระบุไว้ทันทีภายใน 5 นาทีหลังจากยืนยันการชำระเงิน สามารถเปิดอ่านได้ทันทีบนมือถือ แท็บเล็ต หรือคอมพิวเตอร์
+                    </div>
+</details>
+</div>
+</div>
+</section>
+<!-- END: FAQ Section -->
+<!-- BEGIN: Footer -->
+<footer class="bg-darkGrey pt-20 pb-10 border-t border-gold-900" data-purpose="footer">
+<div class="container mx-auto px-6 text-center">
+<h2 class="text-3xl font-bold text-white mb-6">อย่าปล่อยให้โอกาสหลุดมือ</h2>
+<p class="text-gray-400 mb-8 max-w-xl mx-auto">เวลาที่ดีที่สุดในการปลูกต้นไม้คือเมื่อ 20 ปีก่อน เวลาที่ดีที่สุดรองลงมาคือ "วันนี้" ตัดสินใจเปลี่ยนชีวิตของคุณตอนนี้เลย</p>
+<div class="mb-10">
+<img alt="ลายเซ็นของผู้เขียน" class="h-16 mx-auto opacity-70 h-20" src="assets/images/Sign.png"/>
+</div>
+<a class="inline-block px-10 py-4 bg-gold-600 hover:bg-gold-500 text-richBlack font-bold text-lg rounded shadow-lg transition-colors mb-12" href="#pricing">
+                เริ่มต้นวันนี้ - คลิกที่นี่
+            </a>
+<div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+<div class="mb-4 md:mb-0">© 2020 The Top 1% คิดแบบเศรษฐี - All rights reserved.</div>
+<div class="flex space-x-6">
+<a class="hover:text-gold-400" href="#">เงื่อนไขการให้บริการ</a>
+<a class="hover:text-gold-400" href="#">นโยบายความเป็นส่วนตัว</a>
+<a class="hover:text-gold-400" href="https://m.me/thetop0ne">ติดต่อเรา</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: Footer -->
+</body></html>
